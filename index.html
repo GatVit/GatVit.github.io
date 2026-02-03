@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Главная | Портфолио</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        .hero {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 80vh;
+            text-align: center;
+            padding: 20px;
+        }
+
+        .title {
+            font-size: 5rem;
+            font-weight: 800;
+            margin-bottom: 20px;
+            background: linear-gradient(90deg, #6c63ff, #ff6b9d, #6c63ff);
+            background-size: 200% auto;
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            animation: gradient 3s ease infinite;
+            text-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        @keyframes gradient {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .subtitle {
+            font-size: 1.5rem;
+            color: #aaa;
+            max-width: 600px;
+            margin-bottom: 40px;
+        }
+        
+        @media (max-width: 768px) {
+            .title {
+                font-size: 2.5rem;
+            }
+            
+            .subtitle {
+                font-size: 1.2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div id="header-container"></div>
+
+    <main class="main-content">
+        <section class="hero">
+            <h1 class="title">Здесь скоро появится</h1>
+            <p class="subtitle">Моё портфолио с проектами, работами и творческими идеями уже в разработке. Оставайтесь на связи.</p>
+            <div style="margin-top: 30px;">
+                <a href="projects/index.html" class="btn">
+                    <i class="fas fa-rocket"></i>
+                    <span>Посмотреть проекты</span>
+                </a>
+            </div>
+        </section>
+    </main>
+
+    <div id="footer-container"></div>
+    
+    <script>
+        // Загрузка шаблонов
+        Promise.all([
+            fetch('/templates/header.html').then(r => r.text()),
+            fetch('/templates/footer.html').then(r => r.text())
+        ]).then(([header, footer]) => {
+            document.getElementById('header-container').innerHTML = header;
+            document.getElementById('footer-container').innerHTML = footer;
+            
+            // Инициализация меню после загрузки
+            setTimeout(() => {
+                if (typeof initMenu === 'function') initMenu();
+            }, 100);
+        }).catch(error => {
+            console.error('Ошибка загрузки шаблонов:', error);
+        });
+    </script>
+</body>
+</html>
