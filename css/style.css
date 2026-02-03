@@ -1,0 +1,419 @@
+/* Основные стили */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    background-color: #0a0a0f;
+    color: #f0f0f0;
+    min-height: 100vh;
+    overflow-x: hidden;
+    background-image: 
+        radial-gradient(circle at 10% 20%, rgba(28, 58, 173, 0.1) 0%, transparent 20%),
+        radial-gradient(circle at 90% 80%, rgba(128, 0, 128, 0.1) 0%, transparent 20%);
+}
+
+/* Параллакс слои */
+.parallax-layer {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: -1;
+}
+
+.layer-1 {
+    background: url('https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=2072') center/cover no-repeat;
+    opacity: 0.03;
+    transform: translateZ(-10px) scale(2);
+}
+
+.layer-2 {
+    background: radial-gradient(circle at 30% 30%, rgba(120, 119, 198, 0.1) 0%, transparent 50%);
+    transform: translateZ(-5px) scale(1.5);
+}
+
+/* Боковое меню */
+.sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 280px;
+    height: 100vh;
+    background: rgba(15, 15, 25, 0.95);
+    backdrop-filter: blur(10px);
+    border-right: 1px solid rgba(100, 100, 150, 0.2);
+    box-shadow: 5px 0 25px rgba(0, 0, 0, 0.5);
+    transition: all 0.4s ease;
+    z-index: 1000;
+    overflow-y: auto;
+}
+
+.sidebar.collapsed {
+    width: 70px;
+}
+
+.sidebar-header {
+    padding: 25px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid rgba(100, 100, 150, 0.2);
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.logo-icon {
+    font-size: 24px;
+    color: #6c63ff;
+}
+
+.logo-text {
+    font-size: 20px;
+    font-weight: 700;
+    background: linear-gradient(90deg, #6c63ff, #9a94ff);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    transition: opacity 0.3s;
+}
+
+.sidebar.collapsed .logo-text {
+    opacity: 0;
+    width: 0;
+}
+
+.toggle-btn {
+    background: none;
+    border: none;
+    color: #aaa;
+    font-size: 20px;
+    cursor: pointer;
+    transition: color 0.3s;
+    padding: 5px;
+    border-radius: 5px;
+}
+
+.toggle-btn:hover {
+    color: #6c63ff;
+    background: rgba(108, 99, 255, 0.1);
+}
+
+.menu {
+    padding: 20px 0;
+}
+
+.menu-item {
+    list-style: none;
+    position: relative;
+}
+
+.menu-link {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    padding: 15px 20px;
+    color: #ccc;
+    text-decoration: none;
+    transition: all 0.3s;
+    border-left: 3px solid transparent;
+    cursor: pointer;
+}
+
+.menu-link:hover, .menu-link.active {
+    background: rgba(108, 99, 255, 0.1);
+    color: #fff;
+    border-left-color: #6c63ff;
+}
+
+.menu-icon {
+    font-size: 18px;
+    min-width: 24px;
+    text-align: center;
+}
+
+.menu-text {
+    transition: opacity 0.3s;
+    white-space: nowrap;
+    flex: 1;
+}
+
+.sidebar.collapsed .menu-text {
+    opacity: 0;
+    width: 0;
+}
+
+.submenu-arrow {
+    transition: transform 0.3s;
+    font-size: 14px;
+    color: #666;
+}
+
+.has-submenu.active .submenu-arrow {
+    transform: rotate(180deg);
+}
+
+.has-submenu.active .submenu-arrow.fa-chevron-right {
+    transform: rotate(90deg);
+}
+
+/* Подменю */
+.submenu {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.4s ease;
+    background: rgba(10, 10, 20, 0.7);
+}
+
+.has-submenu.active > .submenu {
+    max-height: 1000px;
+}
+
+.submenu-item {
+    position: relative;
+}
+
+.submenu-link {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    padding: 12px 20px 12px 50px;
+    color: #aaa;
+    text-decoration: none;
+    transition: all 0.3s;
+    cursor: pointer;
+}
+
+.submenu-link:hover {
+    background: rgba(108, 99, 255, 0.05);
+    color: #fff;
+}
+
+.submenu-icon {
+    font-size: 14px;
+    min-width: 20px;
+    text-align: center;
+}
+
+/* Под-подменю */
+.subsubmenu {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.4s ease;
+    background: rgba(5, 5, 15, 0.7);
+}
+
+.submenu-item.has-submenu.active > .subsubmenu {
+    max-height: 500px;
+}
+
+.subsubmenu-link {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    padding: 10px 20px 10px 70px;
+    color: #888;
+    text-decoration: none;
+    transition: all 0.3s;
+}
+
+.subsubmenu-link:hover {
+    background: rgba(108, 99, 255, 0.03);
+    color: #ddd;
+}
+
+.subsubmenu-icon {
+    font-size: 12px;
+    min-width: 18px;
+    text-align: center;
+}
+
+/* Кнопка меню для мобильных */
+.menu-toggle-mobile {
+    display: none;
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    z-index: 999;
+    background: rgba(15, 15, 25, 0.9);
+    border: none;
+    color: #fff;
+    font-size: 24px;
+    padding: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+/* Основное содержимое */
+.main-content {
+    margin-left: 280px;
+    padding: 40px;
+    min-height: 100vh;
+    transition: margin-left 0.4s ease;
+}
+
+.sidebar.collapsed ~ .main-content {
+    margin-left: 70px;
+}
+
+/* Адаптивность */
+@media (max-width: 1024px) {
+    .sidebar {
+        width: 250px;
+    }
+    
+    .sidebar.collapsed {
+        width: 70px;
+    }
+    
+    .main-content {
+        margin-left: 250px;
+    }
+    
+    .sidebar.collapsed ~ .main-content {
+        margin-left: 70px;
+    }
+}
+
+@media (max-width: 768px) {
+    .sidebar {
+        transform: translateX(-100%);
+        width: 280px;
+    }
+    
+    .sidebar.active {
+        transform: translateX(0);
+    }
+    
+    .main-content {
+        margin-left: 0;
+        padding: 20px;
+    }
+    
+    .menu-toggle-mobile {
+        display: block;
+    }
+    
+    .sidebar.collapsed {
+        width: 280px;
+    }
+    
+    .sidebar.collapsed .logo-text {
+        opacity: 1;
+        width: auto;
+    }
+    
+    .sidebar.collapsed .menu-text {
+        opacity: 1;
+        width: auto;
+    }
+    
+    .sidebar.collapsed .toggle-btn i {
+        transform: rotate(180deg);
+    }
+}
+
+/* Стили для скрытых элементов в свёрнутом меню */
+.sidebar.collapsed .submenu,
+.sidebar.collapsed .subsubmenu {
+    display: none;
+}
+
+.sidebar.collapsed .has-submenu.active > .submenu,
+.sidebar.collapsed .has-submenu.active > .subsubmenu {
+    display: block;
+    position: absolute;
+    left: 100%;
+    top: 0;
+    width: 200px;
+    background: rgba(15, 15, 25, 0.95);
+    border-radius: 0 10px 10px 0;
+    box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.3);
+    z-index: 1001;
+}
+
+.sidebar.collapsed .submenu-link {
+    padding-left: 20px;
+}
+
+.sidebar.collapsed .subsubmenu-link {
+    padding-left: 30px;
+}
+
+/* Утилиты */
+.btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background: linear-gradient(90deg, #6c63ff, #9a94ff);
+    color: white;
+    border: none;
+    padding: 12px 28px;
+    border-radius: 10px;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 1.1rem;
+    transition: all 0.3s;
+    box-shadow: 0 5px 15px rgba(108, 99, 255, 0.3);
+    cursor: pointer;
+}
+
+.btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(108, 99, 255, 0.4);
+}
+
+.back-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background: rgba(108, 99, 255, 0.1);
+    color: #6c63ff;
+    border: 1px solid #6c63ff;
+    padding: 10px 20px;
+    border-radius: 8px;
+    text-decoration: none;
+    transition: all 0.3s;
+    margin-bottom: 30px;
+}
+
+.back-btn:hover {
+    background: rgba(108, 99, 255, 0.2);
+}
+
+.tag {
+    display: inline-block;
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    margin-right: 5px;
+    margin-bottom: 5px;
+}
+
+.tag-v1 {
+    background: rgba(33, 150, 243, 0.2);
+    color: #2196F3;
+    border: 1px solid rgba(33, 150, 243, 0.3);
+}
+
+.tag-upcoming {
+    background: rgba(255, 193, 7, 0.2);
+    color: #FFC107;
+    border: 1px solid rgba(255, 193, 7, 0.3);
+}
+
+.tag-development {
+    background: rgba(76, 175, 80, 0.2);
+    color: #4CAF50;
+    border: 1px solid rgba(76, 175, 80, 0.3);
+  }
